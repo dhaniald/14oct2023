@@ -12,19 +12,13 @@ export default function Home(event) {
   const [stockprice, setstockprice] = useState(' ');     //Hooks
   
   //2.2 Function defenation area
-  const handleButtonClick = () => {
-    if (selectedOption) {
-      setShowSuccessMessage(true);
-    }
-  };
-
-  const handleSelectChange = (event) => {
+    const handleSelectChange = (event) => {
     console.log(event.target.value);
+
     fetch('/api/getstockprice').then((res) => {
       return res.json()
     }).then((data) => {
-      console.log(data.Price)
-      setstockprice(data.Price)     
+       setstockprice(data.Price)     
     }).catch((err) => {
     }).finally(() => {
 
