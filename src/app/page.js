@@ -1,95 +1,66 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+ 'use client'
+import { Box, Button, FormControl, TextField } from '@mui/material';
+//1. Import area
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+ import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import React, { useState } from 'react';
+import Alert from '@mui/material/Alert';
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+//2. Defenation area
+export default function Home(event) {
+   //2.1 Hook area 
+   const [selectedOption, setSelectedOption] = useState('');     //Hooks
+   const [stockprice, setstockprice] = useState(' ');     //Hooks
+   const [showSuccessMessage, setShowSuccessMessage] = useState(false); //Hooks
+   //2.2 Function defenation area
+   const handleButtonClick = () => {
+    if (selectedOption) {
+      setShowSuccessMessage(true);
+    }
+  };
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+   const handleSelectChange=(event)=>{
+     console.log(event.target.value);
+     fetch('/api/getstockprice').then((res)=>{
+      return res.json()
+      }).then((data)=>{ 
+        console.log(data.Price)  
+        setstockprice(data.Price)
+        {showSuccessMessage && <Alert severity="success">Success! You selected: {selectedOption}</Alert>}     
+      }).catch((err)=>{
+      }).finally(()=>{
+        
+      })
+   };
+   
+  return (   
+   
+     <main>
+      <h1>Select the stock name to check current price: {stockprice}</h1>
+      <Box sm={{ minWidth: 120 }}>
+      <FormControl variant="outlined" fullWidth> 
+        
+          <Select value={selectedOption} 
+          label='Stock'
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          onChange={handleSelectChange}>           
+           <MenuItem value={"hdfc"}>HDFC Bank Limited</MenuItem>
+          <MenuItem value={"icici"}>ICICI Bank Limited</MenuItem>
+          <MenuItem value={"axis"}>Axis Bank Limited</MenuItem>
+          <MenuItem value={"cipla"}>Cipla Limited</MenuItem>
+          <MenuItem value={"tatamotors"}>Tata Motors Ltd</MenuItem>
+          <MenuItem value={"hcl"}>HCL Technologies Ltd</MenuItem>
+          <MenuItem value={"nestle"}>Nestle India Ltd</MenuItem>
+          <MenuItem value={"hero"}>Hero MotoCorp Ltd</MenuItem>
+          <MenuItem value={"coalindia"}>Coal India Ltd</MenuItem>       
+        </Select>
+         
+        </FormControl>
+    </Box>
+      </main>
+ 
   )
 }
+//Export area
