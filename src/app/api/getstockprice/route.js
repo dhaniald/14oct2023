@@ -4,56 +4,56 @@
 async function GET(request) {
     //await
     const searchParams = request.nextUrl.searchParams
-    const stockname = searchParams.get('stockname')
-    var min, max, formattedvalue,resData;
-    switch (stockname) {
+    const stockName = searchParams.get('stockName')
+    var min, max, stockPrice,resData;
+    switch (stockName) {
         case 'icici':
             min = 950;
             max = 1250;
-            var formattedvalue = parseFloat((Math.random() * (max - min) + min).toFixed(2))
+            var stockPrice = parseFloat((Math.random() * (max - min) + min).toFixed(2))
             resData = {
-                stockname:stockname,                
-                Price: formattedvalue
+                stockName:stockName,                
+                Price: stockPrice
             }
             break;
 
         case 'hdfc':
             min = 1530;
             max = 1650;
-            var formattedvalue = parseFloat((Math.random() * (max - min) + min).toFixed(2))
+            var stockPrice = parseFloat((Math.random() * (max - min) + min).toFixed(2))
             resData = {
-                stockname:stockname,                
-                Price: formattedvalue
+                stockName:stockName,                
+                Price: stockPrice
             }
             break;
 
         case 'axis':
             min = 660;
             max = 750;
-            var formattedvalue = parseFloat((Math.random() * (max - min) + min).toFixed(2))
+            var stockPrice = parseFloat((Math.random() * (max - min) + min).toFixed(2))
             resData = {
-                stockname:stockname,                
-                Price: formattedvalue
+                stockName:stockName,                
+                Price: stockPrice
             }
             break;
 
         case 'cipla':
             min = 220;
             max = 400;
-            var formattedvalue = parseFloat((Math.random() * (max - min) + min).toFixed(2))
+            var stockPrice = parseFloat((Math.random() * (max - min) + min).toFixed(2))
             resData = {
-                stockname:stockname,                
-                Price: formattedvalue
+                stockName:stockName,                
+                Price: stockPrice
             }
             break;
 
         case 'bhelltd':
             min = 130;
             max = 260;
-            var formattedvalue = parseFloat((Math.random() * (max - min) + min).toFixed(2))
+            var stockPrice = parseFloat((Math.random() * (max - min) + min).toFixed(2))
             resData = {
-                stockname:stockname,                
-                Price: formattedvalue
+                stockName:stockName,                
+                Price: stockPrice
             }
             break;
 
